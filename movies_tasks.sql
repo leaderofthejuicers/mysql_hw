@@ -59,11 +59,11 @@ join genres on movies.genres_id = genres.id
 group by genres.title;
 
 -- 10. 
-DELETE FROM movies
-WHERE id = (
-    SELECT movies.id
-    FROM movies
-    JOIN genres ON movies.genres_id = genres.id
-    WHERE movies.title = 'Дикие истории' AND movies.year = 2014 AND genres.title = 'Комедия'
-    LIMIT 1
+delete from movies
+where id = (
+    select movies.id
+    from movies
+    join genres on movies.genres_id = genres.id
+    where movies.title = 'Дикие истории' and movies.year = 2014 and genres.title = 'Комедия'
+    limit 1
 );
