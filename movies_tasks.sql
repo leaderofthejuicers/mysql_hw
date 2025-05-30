@@ -10,7 +10,7 @@ where directors.full_name = "Фрэнсис Форд Коппола";
 
 -- 3. 
 select count(*) from movies 
-where year > (2025 - 20);
+where year > (year(curdate()) - 20);
 
 -- 4. 
 select distinct genres.title from genres 
