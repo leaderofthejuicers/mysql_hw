@@ -33,6 +33,37 @@ order by count(movies.id) desc
 limit 1;
  
 -- 7. 
+select movies.title, genres.title 
+from movies 
+join companies on movies.companies_id = companies.id
+join genres on movies.genres_id = genres.id 
+where movies.companies_id = ( 
+	select companies.id 
+	from movies 
+	join companies on movies.companies_id = companies.id
+	group by companies.id 
+	order by sum(movies.budget) desc 
+	limit 1
+);
+
 -- 8. 
+select avg(budget)
+from movies 
+join companies on movies.companies_id = companies.id
+where companies.title = "Warner Bros.";
+
 -- 9. 
+select genres.title, count(movies.id) films_count, avg(budget)
+from movies 
+join genres on movies.genres_id = genres.id
+group by genres.title;
+
 -- 10. 
+DELETE FROM movies
+WHERE id = (
+    SELECT movies.id
+    FROM movies
+    JOIN genres ON movies.genres_id = genres.id
+    WHERE movies.title = 'Дикие истории' AND movies.year = 2014 AND genres.title = 'Комедия'
+    LIMIT 1
+);
